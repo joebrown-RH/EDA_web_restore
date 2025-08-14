@@ -1,0 +1,43 @@
+---
+- name: Restore missing /var/www/html/index.html
+  hosts: rhel1
+  become: true
+  gather_facts: true
+
+  vars:
+    index_owner: apache
+    index_group: apache
+    index_mode: "0644"
+    index_content: |
+      <!doctype html>
+      <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <title>RHEL Web Server</title>
+      </head>
+      <body>
+        <h1>It works!</h1>
+        <p>This index.html was automatically restored by Event-Driven Ansible.</p>
+      </body>
+      </html>
+
+  tasks:
+    - name: Ensure web root exists
+      file:
+        path: /var/www/html
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Recreate index.html
+      copy:
+        dest: /var/www/html/index.html
+        content: "{{ index_content }}"
+        owner: "{{ index_owner }}"
+        group: "{{ index_group }}"
+        mode: "{{ index_mode }}"
+
+    - name: Restore SELinux context if enabled
+      command: restorecon -v /var/www/html/index.html
+      when: ansible_selinux is defined and ansible_selinux.status == "enabled"
