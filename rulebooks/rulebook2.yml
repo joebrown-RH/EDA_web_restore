@@ -1,6 +1,6 @@
 ---
 - name: Restore webserver Index file
-  hosts: all
+  hosts: rhel1
   
 # Watches the file and runs a playbook if it's deleted.
   sources:
