@@ -1,0 +1,15 @@
+---
+- name: Check webserver
+  hosts: all
+  sources:
+    - ansible.eda.url_check:
+        urls:
+          - http://rhel1.bn6fj.gcp.redhatworkshops.io/
+        delay: 60
+  rules:
+    - name: Check webserver
+      condition: event.url_check.status == "down"
+      action:
+        run_job_template:
+          name: "Restore Index File"
+          organization: "Default"
