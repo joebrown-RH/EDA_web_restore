@@ -1,1 +1,16 @@
-
+---
+- name: Restore webserver Index file
+  hosts: rhel1
+# Watches the file and runs a playbook if it's deleted.
+  sources:
+    - name: watch-inde
+      ansible.eda.watchdog:
+        src_path: /var/www/html/index.html
+        recursive: false
+        
+  rules:
+    - name: Restore index.html if deleted
+      condition: event.event_type == "deleted" and event.src_path == "/var/www/html/index.html"
+      actions:
+        - run_playbook:
+            name: restore-index.yml
