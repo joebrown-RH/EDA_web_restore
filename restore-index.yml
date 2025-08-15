@@ -1,6 +1,6 @@
 ---
 - name: Setup the web server
-  hosts: "{{ HOSTS }}"
+  hosts: rhel1
   become: true
 
   tasks:
