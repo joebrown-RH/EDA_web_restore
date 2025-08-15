@@ -1,0 +1,21 @@
+---
+# This rulebook monitors for the deletion of the index.html file.
+# When the file is detected as missing, it triggers a job template on the Controller.
+- name: Monitor web server for index.html file deletion
+  hosts: webserver
+  sources:
+    - name: file_monitor
+      # The `ansible.eda.file_watch` plugin is designed to monitor for file events.
+      ansible.eda.file_watch:
+        # The `path` parameter specifies the directory to watch.
+        path: /var/www/html
+  rules:
+    - name: Restore index.html if deleted
+      # The condition checks for a "deleted" event type.
+      condition: event.event_type == 'deleted' and event.path == '/var/www/html/index.html'
+      action:
+        run_job_template:
+          # This is the name of the job template on your Automation Controller.
+          name: "Restore Index File"
+          # This is the organization where the job template exists.
+          organization: "Default"
