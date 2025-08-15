@@ -6,7 +6,7 @@
     - name: watch-index
       ansible.eda.file_watch:
         path: "/var/www/html/index.html"
-        recursive: false
+        recursive: true
         
   rules:
     - name: Restore index.html if deleted
