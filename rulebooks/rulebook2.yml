@@ -5,9 +5,9 @@
 # Watches the file and runs a playbook if it's deleted.
   sources:
     - name: watch-index
-      ansible.eda.files:
-        file_stats:
-          - path: /var/www/html/index.html
+      ansible.eda.file:
+        files:
+          - /var/www/html/index.html
         recursive: true
         
   rules:
