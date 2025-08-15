@@ -5,12 +5,12 @@
   sources:
     - name: watch-index
       ansible.eda.file_watch:
-        path: "/var/www/html/index.html"
+        path: /var/www/html/index.html
         recursive: true
         
   rules:
     - name: Restore index.html if deleted
-      condition: event.event_type == "deleted" and event.src_path == "/var/www/html/index.html"
+      condition: event.event_type == "deleted"
       actions:
         - run_job_template:
             name: Restore Index File
