@@ -2,7 +2,7 @@
 # This rulebook monitors for the deletion of the index.html file.
 # When the file is detected as missing, it triggers a job template on the Controller.
 - name: Monitor web server for index.html file deletion
-  hosts: rhel1
+  hosts: localhost
   sources:
     - name: file_monitor
       # The `ansible.eda.file_watch` plugin is designed to monitor for file events.
