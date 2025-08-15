@@ -12,5 +12,6 @@
     - name: Restore index.html if deleted
       condition: event.event_type == "deleted" and event.src_path == "/var/www/html/index.html"
       actions:
-        - run_playbook:
-            name: restore-index.yml
+        - run_job_template:
+            name: Restore Index File
+            organization: Default
