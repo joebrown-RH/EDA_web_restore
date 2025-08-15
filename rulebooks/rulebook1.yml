@@ -5,7 +5,7 @@
   sources:
     - name: watch-index
       ansible.eda.file_watch:
-        path: /var/www/html/index.html
+        path: "/var/www/html/index.html"
         recursive: false
         
   rules:
