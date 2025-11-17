@@ -4,7 +4,7 @@
   sources:
     - ansible.eda.url_check:
         urls:
-          - http://rhel1.244wk.gcp.redhatworkshops.io
+          - "{{ public_dns_name }}"
         delay: 15
   rules:
     - name: Check webserver
