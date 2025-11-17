@@ -1,6 +1,6 @@
 ---
 - name: Setup the web server
-  hosts: rhel1
+  hosts: all
   become: true
 
   tasks:
